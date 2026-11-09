@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KAISO Hygiene Supplies</title>
+<style>
+body{font-family:Arial;margin:0;background:#f4f8ff;color:#222}
+.header{background:#0b3d91;color:white;padding:25px;text-align:center;border-bottom:5px solid #FFD700}
+.header h1{margin:0;font-size:32px;letter-spacing:2px}
+.section{max-width:900px;margin:auto;padding:20px}
+.card{background:white;border-radius:12px;padding:18px;margin:12px 0;box-shadow:0 2px 10px #ddd;border-left:6px solid #0b3d91}
+.price{font-size:26px;font-weight:bold;color:#0b3d91}
+.btn{background:#25D366;color:white;border:none;padding:14px 20px;border-radius:8px;font-size:18px;width:100%;cursor:pointer}
+input,select{width:100%;padding:12px;margin:6px 0;border:1px solid #ccc;border-radius:8px;font-size:16px}
+.yellow{background:#FFD700;padding:15px;border-radius:12px}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>KAISO</h1>
+  <h2>Hygiene Supplies</h2>
+  <p>Reliable Hygiene Solutions for Your Business</p>
+  <p>📞 067 177 5796 | ✉️ kaisosolutions@gmail.com</p>
+</div>
+<div class="section">
+  <div class="yellow">
+    <h3>WHO WE ARE</h3>
+    <p>KAISO is a local youth-owned initiative dedicated to improving hygiene in offices, restaurants, schools, and other businesses.</p>
+    <ul>
+      <li>Ensures your staff and clients never run out of tissues</li>
+      <li>Flexible weekly delivery based on actual usage</li>
+      <li>We start small, monitor usage and scale according to your needs</li>
+    </ul>
+  </div>
+  <h2>OUR PRODUCTS & PRICING</h2>
+  {% for p in products %}
+  <div class="card">
+    <h3>{{ p.name }}</h3>
+    <p>{{ p.desc }}</p>
+    <div class="price">R{{ p.price }} / 48-pack</div>
+  </div>
+  {% endfor %}
+  <p><b>Delivery Fee: R{{ delivery_fee }} per month</b> (covers regular deliveries)</p>
+  <h2>🛒 ORDER NOW - Select Option</h2>
+  <form method="POST" class="card">
+    <label>Your Name</label>
+    <input name="name" required placeholder="e.g. Thabo - Soweto Office">
+    <label>Phone / WhatsApp</label>
+    <input name="phone" required placeholder="067...">
+    <label>Are you ordering for?</label>
+    <select name="customer_type">
+      <option value="Business">Business / Company</option>
+      <option value="Person">Person / Home</option>
+      <option value="School">School</option>
+      <option value="Restaurant">Restaurant</option>
+    </select>
+    <label>Select Product</label>
+    <select name="product">
+      {% for p in products %}
+      <option value="{{ p.id }}">{{ p.name }} - R{{ p.price }}</option>
+      {% endfor %}
+    </select>
+    <label>Quantity (How many 48-packs?)</label>
+    <input type="number" name="qty" value="1" min="1">
+    <label>Delivery Option</label>
+    <select name="delivery">
+      <option value="delivery">Delivery - R100 / month</option>
+      <option value="collection">Collection - FREE</option>
+    </select>
+    <label>Delivery Address</label>
+    <input name="address" placeholder="Street, Area, Soweto...">
+    <button class="btn" type="submit">Order on WhatsApp →</button>
+  </form>
+  <div style="text-align:center;padding:20px"><b>KEEP YOUR BUSINESS STOCKED AND HYGIENIC!</b><br>Sfiso Mazubuko | 067 177 5796</div>
+</div>
+</body>
+</html>
